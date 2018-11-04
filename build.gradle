@@ -1,0 +1,54 @@
+import java.util.concurrent.TimeUnit
+
+//One thing to know is passing in a system property from the command line it needs to look like -Dorg.gradle.project.<property_name>=<property_value>
+apply plugin: 'java'
+
+//The groovy plugin will also apply the java plugin. Read more at http://www.gradle.org/docs/current/userguide/tutorial_groovy_projects.html
+apply plugin: 'groovy'
+
+//Here you can specify the IDE that you will use and it will create tasks associated with it.
+apply plugin: 'idea'
+
+
+group 'ZohoCRMTests'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //There are 2 ways to list the dependency information.  This way is the short cut
+    implementation 'ch.qos.logback:logback-classic:1.1.1'
+
+    //Groovy information to compile groovy code
+    implementation 'org.codehaus.groovy:groovy-all:2.2.0'
+
+    //Needed to help with injections for TestNG listeners
+    implementation 'com.google.inject:guice:3.0'
+
+    //This way is the long cut
+    //This is the TestNG test execution library that is better than JUnit
+    //Adding a + for a version number means get the latest number for that version.  So in this case get the latest 6.8.whatever deployment
+    testImplementation group: 'org.testng', name: 'testng', version: '6.8.+'
+
+    //An assertion library that is better than JUnit defaults
+    testImplementation 'org.easytesting:fest-assert-core:2.0M10'
+
+    //Better reporting for testng.  It outputs a nice html report
+    testCompile 'org.uncommons:reportng:1.1.4'
+
+
+    implementation group: 'junit', name: 'junit', version: '4.+'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.+'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.+'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '3.+'
+    implementation 'org.testng:testng:6.13'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+}
